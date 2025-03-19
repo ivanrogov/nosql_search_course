@@ -1,0 +1,39 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          use_structured_entries: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      javax:
+        persistence.sharedCache.mode: ENABLE_SELECTIVE
+    show-sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booking
+    username: admin
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://mongo:mongo@localhost:27017/booking?authSource=admin}
+      database: ${MONGODB_DB:booking}
+      auto-index-creation: true
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
+    net:
+      sf:
+        ehcache=debug:
